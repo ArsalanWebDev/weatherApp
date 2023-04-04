@@ -1,22 +1,21 @@
-const apiKey = "16aef503fb4a8a8ca77449b134a07bfb";
-const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        const apiKey = "16aef503fb4a8a8ca77449b134a07bfb";
 
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        const searchBox = document.querySelector("#theCity");
+        const sBtn = document.querySelector("#btn");
 
-const searchBox = document.querySelector( ".search input" );
-const sBtn = document.querySelector( "#btn" );
+        async function checkWeather(city) {
+            const response = await fetch(apiUrl + city + `&appid=${ apiKey }`);
+            var data = await response.json();
+            console.log(data);
 
-async function checkWeather (city){
-    const response = await fetch( apiUrl + city + `&appid=${ apiKey }` );
-    var data = await response.json();
-    console.log( data );
-
-    document.querySelector( ".city" ).innerHTML = data.name;
-    document.querySelector( ".temp" ).innerHTML = Math.round(data.main.temp) + "°c";
-    document.querySelector( ".humidity" ).innerHTML = data.main.humidity + "%";
-    document.querySelector( ".wind" ).innerHTML = data.wind.speed + "km/h";
-}
-// console.log( seBtn );
-sBtn.addEventListener( "click", () =>
-{   checkWeather( searchBox.value );
-} )
-
+            document.querySelector(".city").innerHTML = data.name;
+            document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°c";
+            document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+            document.querySelector(".wind").innerHTML = data.wind.speed + "km/h";
+        }
+        // console.log( seBtn );
+        sBtn.addEventListener("click", () => {
+            checkWeather(searchBox.value);
+            console.log("xxxx", searchBox.value);
+        })
